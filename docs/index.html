@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strollmap — Support & Privacy</title>
+  <meta name="description" content="Support and privacy information for Strollmap, the free walking tour app." />
+  <style>
+    :root {
+      --bg:       #faf5ed;
+      --surface:  #ffffff;
+      --ink:      #241712;
+      --muted:    #6e564a;
+      --subtle:   #a8907f;
+      --rule:     #e8dcc8;
+      --accent:   #d65a31;
+      --deep:     #a13a16;
+      --soft:     #fadcce;
+      --guide:    #5a8a6a;
+      --radius:   14px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--surface);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-brand {
+      font-size: 22px; font-weight: 800; letter-spacing: -0.3px;
+      text-decoration: none; color: var(--ink);
+    }
+    .nav-brand span { color: var(--accent); font-style: italic; font-weight: 700; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 14px; font-weight: 600; transition: color .15s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: linear-gradient(135deg, #241712 0%, #5c2c18 50%, #d65a31 100%);
+      color: #fff;
+      padding: 80px 24px 60px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      font-size: 11px; letter-spacing: 2.5px; font-weight: 700;
+      color: rgba(255,255,255,.65); text-transform: uppercase; margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 7vw, 62px);
+      font-weight: 800; letter-spacing: -1px; line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .hero h1 em { color: #f9c09a; font-style: italic; }
+    .hero p {
+      font-size: 17px; color: rgba(255,255,255,.8);
+      max-width: 520px; margin: 0 auto 36px;
+    }
+    .hero-pills { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 18px; border-radius: 999px;
+      font-size: 13px; font-weight: 700;
+      text-decoration: none; transition: opacity .15s;
+    }
+    .pill:hover { opacity: .88; }
+    .pill-primary { background: var(--accent); color: #fff; }
+    .pill-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.45); }
+
+    /* ─── SCREENSHOTS ─── */
+    .screenshots-section {
+      padding: 72px 24px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--rule);
+    }
+    .section-label {
+      font-size: 11px; letter-spacing: 2px; font-weight: 700;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 8px;
+      text-align: center;
+    }
+    .section-title {
+      font-size: clamp(26px, 4vw, 38px); font-weight: 800; letter-spacing: -0.5px;
+      color: var(--ink); text-align: center; margin-bottom: 10px;
+    }
+    .section-sub {
+      font-size: 16px; color: var(--muted); text-align: center;
+      max-width: 540px; margin: 0 auto 48px;
+    }
+
+    .screenshots-scroll {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 12px 4px 20px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .screenshot-frame {
+      flex: 0 0 auto;
+      width: 220px;
+      scroll-snap-align: start;
+      text-align: center;
+    }
+    .screenshot-device {
+      background: #1a1a1a;
+      border-radius: 32px;
+      padding: 12px;
+      box-shadow: 0 24px 60px rgba(0,0,0,.22), 0 4px 12px rgba(0,0,0,.12);
+      display: inline-block;
+      width: 100%;
+    }
+    .screenshot-device img {
+      width: 100%;
+      border-radius: 22px;
+      display: block;
+    }
+    .screenshot-caption {
+      margin-top: 14px;
+      font-size: 12px; font-weight: 700; color: var(--muted);
+      letter-spacing: 0.5px; text-transform: uppercase;
+    }
+
+    /* ─── FEATURES GRID ─── */
+    .features-section {
+      padding: 72px 24px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .feature-icon { font-size: 28px; margin-bottom: 12px; }
+    .feature-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .feature-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ─── CONTENT SECTIONS ─── */
+    .content-section {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 72px 24px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .content-section:last-of-type { border-bottom: none; }
+
+    .section-badge {
+      display: inline-block;
+      font-size: 10px; letter-spacing: 2px; font-weight: 700;
+      text-transform: uppercase;
+      background: var(--soft); color: var(--deep);
+      padding: 5px 12px; border-radius: 999px;
+      margin-bottom: 16px;
+    }
+    .section-badge.green { background: #e0f0e6; color: #2c5a3a; }
+
+    h2 {
+      font-size: clamp(24px, 3vw, 32px); font-weight: 800; letter-spacing: -0.4px;
+      color: var(--ink); margin-bottom: 10px;
+    }
+    .lead {
+      font-size: 16px; color: var(--muted); margin-bottom: 36px; line-height: 1.7;
+    }
+
+    h3 {
+      font-size: 16px; font-weight: 700; color: var(--ink);
+      margin: 28px 0 8px;
+    }
+    h3:first-of-type { margin-top: 0; }
+
+    p { color: var(--muted); font-size: 15px; margin-bottom: 14px; line-height: 1.7; }
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      padding-left: 20px;
+      color: var(--muted); font-size: 15px; margin-bottom: 14px;
+    }
+    li { margin-bottom: 6px; line-height: 1.65; }
+    strong { color: var(--ink); font-weight: 700; }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    details summary {
+      padding: 16px 20px;
+      font-size: 15px; font-weight: 700; color: var(--ink);
+      cursor: pointer;
+      list-style: none;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::after {
+      content: "+"; font-size: 20px; color: var(--accent);
+      transition: transform .2s; line-height: 1;
+    }
+    details[open] summary::after { content: "−"; }
+    details .faq-body {
+      padding: 0 20px 16px;
+      font-size: 14px; color: var(--muted); line-height: 1.65;
+    }
+    details[open] summary { color: var(--accent); }
+
+    /* Contact card */
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex; gap: 20px; align-items: flex-start;
+      margin-top: 32px;
+    }
+    .contact-icon { font-size: 32px; flex-shrink: 0; }
+    .contact-title { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+    .contact-body { font-size: 14px; color: var(--muted); margin-bottom: 14px; line-height: 1.6; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent); color: #fff;
+      padding: 10px 20px; border-radius: 999px;
+      font-size: 13px; font-weight: 700; text-decoration: none;
+      transition: opacity .15s;
+    }
+    .contact-link:hover { opacity: .88; }
+
+    /* Privacy highlight */
+    .privacy-highlight {
+      background: #e0f0e6;
+      border: 1px solid #a8d4b6;
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .privacy-highlight .phi { font-size: 24px; flex-shrink: 0; }
+    .privacy-highlight p {
+      font-size: 14px; color: #2c5a3a; margin: 0; line-height: 1.6;
+    }
+    .privacy-highlight strong { color: #1a3d28; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,.5);
+      padding: 36px 24px;
+      text-align: center;
+    }
+    .footer-brand {
+      font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 6px;
+    }
+    .footer-brand span { color: #f9c09a; font-style: italic; }
+    footer p { font-size: 13px; color: rgba(255,255,255,.45); margin-bottom: 4px; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-top: 16px; }
+    .footer-links a { color: rgba(255,255,255,.5); font-size: 13px; text-decoration: none; }
+    .footer-links a:hover { color: rgba(255,255,255,.9); }
+
+    @media (max-width: 600px) {
+      .nav-links { gap: 16px; }
+      .contact-card { flex-direction: column; gap: 12px; }
+      .screenshots-scroll { flex-wrap: nowrap; justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Stroll<span>map</span></a>
+  <ul class="nav-links">
+    <li><a href="#support">Support</a></li>
+    <li><a href="#privacy">Privacy</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Free Walking Tours · Tip-Based</p>
+  <h1>Walk every city like<br><em>a local</em></h1>
+  <p>Strollmap connects curious travelers with passionate local guides for free, tip-based walking tours around the world.</p>
+  <div class="hero-pills">
+    <a href="#support" class="pill pill-primary">🙋 Get support</a>
+    <a href="#privacy" class="pill pill-outline">🔒 Privacy policy</a>
+  </div>
+</section>
+
+<!-- SCREENSHOTS -->
+<section class="screenshots-section">
+  <p class="section-label">Inside the app</p>
+  <h2 class="section-title">Everything you need to explore</h2>
+  <p class="section-sub">Browse curated walking tours, book a slot, and manage your schedule — all in one place.</p>
+
+  <div class="screenshots-scroll">
+    <div class="screenshot-frame">
+      <div class="screenshot-device">
+        <img src="screenshots/screen-browse.png" alt="Browse walking tours by city and theme" loading="lazy" />
+      </div>
+      <p class="screenshot-caption">Browse Tours</p>
+    </div>
+    <div class="screenshot-frame">
+      <div class="screenshot-device">
+        <img src="screenshots/screen-detail.png" alt="Tour detail with itinerary and guide info" loading="lazy" />
+      </div>
+      <p class="screenshot-caption">Tour Detail</p>
+    </div>
+    <div class="screenshot-frame">
+      <div class="screenshot-device">
+        <img src="screenshots/screen-booking.png" alt="Book a tour slot" loading="lazy" />
+      </div>
+      <p class="screenshot-caption">Book a Slot</p>
+    </div>
+    <div class="screenshot-frame">
+      <div class="screenshot-device">
+        <img src="screenshots/screen-guide.png" alt="Guide dashboard to manage your tours" loading="lazy" />
+      </div>
+      <p class="screenshot-caption">Guide Dashboard</p>
+    </div>
+    <div class="screenshot-frame">
+      <div class="screenshot-device">
+        <img src="screenshots/screen-inbox.png" alt="Guide inbox to respond to booking requests" loading="lazy" />
+      </div>
+      <p class="screenshot-caption">Guide Inbox</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section">
+  <p class="section-label">Key features</p>
+  <h2 class="section-title" style="text-align:center; margin-bottom:10px;">Built for both sides of the walk</h2>
+  <p class="section-sub">Whether you're exploring a new city or sharing the one you call home.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🗺️</div>
+      <div class="feature-title">Browse by city & theme</div>
+      <div class="feature-body">Filter tours by destination and category — history, food, art, nature, nightlife, or family-friendly.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📅</div>
+      <div class="feature-title">Slot-based booking</div>
+      <div class="feature-body">Guides publish specific dates and times. Tourists pick a slot and send a request — no back-and-forth needed.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⭐</div>
+      <div class="feature-title">Verified guide profiles</div>
+      <div class="feature-body">Every guide listing includes a rating, review count, languages spoken, and a detailed itinerary of stops.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🧭</div>
+      <div class="feature-title">Become a guide</div>
+      <div class="feature-body">Create your own tour listing in minutes. Manage your schedule, respond to booking requests, and grow your audience.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💸</div>
+      <div class="feature-title">Always free · tip-based</div>
+      <div class="feature-body">Tours are free to join. Guides earn tips from happy travelers. No hidden fees, no subscriptions.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-title">Private by design</div>
+      <div class="feature-body">All your data stays on your device. No account required, no cloud sync, no data sold to third parties.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section class="content-section" id="support">
+  <span class="section-badge">Support</span>
+  <h2>How can we help?</h2>
+  <p class="lead">Find answers to common questions below. If you can't find what you're looking for, reach out directly — we typically respond within one business day.</p>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <details>
+        <summary>How do I book a walking tour?</summary>
+        <div class="faq-body">
+          Tap any tour card on the <strong>Browse</strong> tab to open its detail page. Scroll down and tap <strong>"Request this tour"</strong>. Choose an available slot, set your party size, add an optional note to the guide, and tap <strong>"Send request"</strong>. Your booking will appear on the <strong>Bookings</strong> tab immediately.
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>How do I cancel or modify a booking?</summary>
+        <div class="faq-body">
+          Go to the <strong>Bookings</strong> tab and tap the booking you want to change. From the detail sheet you can pick a different available slot, adjust your party size, update your note, or cancel the booking entirely.
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>What does "pending" mean on my booking?</summary>
+        <div class="faq-body">
+          <strong>Pending</strong> means your request has been sent and is waiting for the guide to confirm. Once the guide accepts, the status changes to <strong>Confirmed</strong>. If the guide is unable to accommodate you, it will show as <strong>Declined</strong> and will move to your Past bookings.
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>How do I become a guide and create a tour?</summary>
+        <div class="faq-body">
+          Tap the <strong>"I'm a tourist"</strong> pill in the top-right corner to switch to Guide mode. From the <strong>My tours</strong> tab, tap <strong>"+ Create a new tour"</strong>. Fill in the title, city, description, meeting point, available slots, and at least one itinerary stop, then tap <strong>Save</strong>. Your listing will appear in Browse immediately.
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>How do I respond to booking requests as a guide?</summary>
+        <div class="faq-body">
+          Switch to Guide mode and open the <strong>Inbox</strong> tab. Pending requests appear at the top — tap <strong>Confirm</strong> or <strong>Decline</strong> for each one. Handled requests move to the Handled section below.
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>Are the tours really free?</summary>
+        <div class="faq-body">
+          Yes. All tours on Strollmap are free to join. Guides offer their time on a tip-based model — if you enjoyed your walk, a tip is appreciated but never required. There are no booking fees or in-app purchases.
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>Why isn't my data syncing to another device?</summary>
+        <div class="faq-body">
+          Strollmap is a local-first app — all your tours, bookings, and profile data are stored on your device only and do not sync to any cloud server. To move data to a new device, you will need to re-enter it. This is by design to protect your privacy.
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>How do I delete my data?</summary>
+        <div class="faq-body">
+          Since all data is stored locally on your device, you can remove it completely by uninstalling the app. This permanently deletes your profile, tours, and bookings. There is no account to close because no data is sent to our servers.
+        </div>
+      </details>
+    </div>
+
+  </div>
+
+  <div class="contact-card">
+    <div class="contact-icon">✉️</div>
+    <div>
+      <div class="contact-title">Still need help?</div>
+      <p class="contact-body">Our support team is here for you. Send us a message and we'll get back to you within one business day. Please include your device model and iOS version so we can assist you faster.</p>
+      <a href="mailto:support@markutilitylabs.com" class="contact-link">Email support →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="content-section" id="privacy">
+  <span class="section-badge green">Privacy Policy</span>
+  <h2>Your privacy, simply explained</h2>
+  <p class="lead">Last updated: June 1, 2026. This policy applies to the Strollmap iOS and Android applications published by <strong>Mark Utility Labs</strong>.</p>
+
+  <div class="privacy-highlight">
+    <div class="phi">🔒</div>
+    <p><strong>Short version:</strong> Strollmap stores everything on your device. We do not collect, transmit, or sell your personal data. There are no accounts, no servers, and no third-party analytics.</p>
+  </div>
+
+  <h3>1. Information we collect</h3>
+  <p>Strollmap does not collect any personal information. All data you enter — your profile name, avatar, bio, tours you create, and bookings you make — is stored exclusively on your device using the operating system's local storage (AsyncStorage). This data never leaves your device.</p>
+
+  <h3>2. Information we do not collect</h3>
+  <p>We do not collect, store, or process:</p>
+  <ul>
+    <li>Your name, email address, or any contact information</li>
+    <li>Location data or GPS coordinates</li>
+    <li>Device identifiers, advertising IDs, or fingerprints</li>
+    <li>Usage analytics, crash reports, or telemetry</li>
+    <li>Payment information of any kind</li>
+    <li>Photos, contacts, or any other device data</li>
+  </ul>
+
+  <h3>3. Local storage only</h3>
+  <p>All app content — your profile, tours, bookings, and settings — is stored locally on your device using <strong>AsyncStorage</strong>, a standard on-device key-value store. Uninstalling the app permanently removes all stored data. We have no ability to access, recover, or transfer this data.</p>
+
+  <h3>4. Third-party services</h3>
+  <p>Strollmap does not integrate any third-party analytics services (such as Firebase, Mixpanel, or Amplitude), advertising networks, crash reporting tools, or social login providers. No SDK or library in the app contacts an external server on your behalf.</p>
+
+  <h3>5. Permissions</h3>
+  <p>Strollmap does not request access to your camera, microphone, contacts, location, photo library, or any other system permission. The only system capability used is local storage, which requires no special permission.</p>
+
+  <h3>6. Children's privacy</h3>
+  <p>Strollmap does not knowingly collect personal information from children under the age of 13. Because the app collects no personal data at all, it poses no privacy risk to users of any age. If you believe a child has provided personal data through another channel, please contact us and we will address it promptly.</p>
+
+  <h3>7. Data security</h3>
+  <p>Because no data is transmitted to external servers, the security of your information depends solely on your device's own security features (such as passcode, Face ID, or Touch ID). We recommend keeping your device and operating system up to date.</p>
+
+  <h3>8. Changes to this policy</h3>
+  <p>If we ever change how data is handled — for example, if a future version introduces optional cloud sync — we will update this policy and notify users through an in-app notice and a new App Store release note before those changes take effect.</p>
+
+  <h3>9. Contact us</h3>
+  <p>If you have any questions about this privacy policy or your data, please contact us at:</p>
+  <p>
+    <strong>Mark Utility Labs</strong><br>
+    Email: <a href="mailto:privacy@markutilitylabs.com" style="color: var(--accent);">privacy@markutilitylabs.com</a>
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Stroll<span>map</span></div>
+  <p>Free walking tours, everywhere.</p>
+  <p style="margin-top:4px;">© 2026 Mark Utility Labs. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#support">Support</a>
+    <a href="#privacy">Privacy Policy</a>
+    <a href="mailto:support@markutilitylabs.com">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
