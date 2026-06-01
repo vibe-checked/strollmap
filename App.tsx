@@ -458,8 +458,8 @@ export default function App() {
     });
   }, [allTours, browseCity, browseCategory]);
 
-  const upcomingBookings = useMemo(() => myBookings.filter((b) => b.status !== 'completed'), [myBookings]);
-  const pastBookings = useMemo(() => myBookings.filter((b) => b.status === 'completed'), [myBookings]);
+  const upcomingBookings = useMemo(() => myBookings.filter((b) => b.status === 'pending' || b.status === 'confirmed'), [myBookings]);
+  const pastBookings = useMemo(() => myBookings.filter((b) => b.status === 'completed' || b.status === 'declined'), [myBookings]);
   const pendingInbox = useMemo(() => inbox.filter((b) => b.status === 'pending'), [inbox]);
   const handledInbox = useMemo(() => inbox.filter((b) => b.status !== 'pending'), [inbox]);
 
